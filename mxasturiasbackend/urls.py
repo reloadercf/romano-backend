@@ -16,8 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from articulos import urls as articulos_urls
+from django.conf.urls import url
+from django.views.static import serve
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(articulos_urls,namespace='articulo')),
+
+    url(
+        regex=r'^media/(?P<path>.*)$',
+        view=serve,
+        kwargs={'document_root': settings.MEDIA_ROOT}
+    ),
 ]
