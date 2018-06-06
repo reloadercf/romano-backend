@@ -1,0 +1,10 @@
+{%extends 'index.html'%}
+{%block ejemplo%}
+{%for obj in object_list%}
+
+<img src="{{obj.publicidad1.url}}" alt="Algo">
+
+
+{%endfor%}
+
+{%endblock ejemplo%}
