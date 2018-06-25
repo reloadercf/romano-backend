@@ -1,0 +1,50 @@
+{%extends 'index.html'%}
+{%block ejemplo%}
+<h2 class="uk-heading-hero">{{object.titulo}}</h2>
+
+
+
+
+<div class="uk-flex uk-flex-left">
+    <div class="uk-card uk-card-default uk-card-body uk-margin-left">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+                    <img src="{{object.publicidad2.url}}" alt="" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-child-width-expand@s" uk-grid>
+    <div class="uk-grid-item-match">
+        <div class="uk-card uk-card-default uk-card-body">
+            <img src="{{object.imagenportada.url}}" alt="Algo">
+        </div>
+     </div>
+    <div>
+        <h3>{{object.textograndecuerpo}}</h3>
+        <p>
+            {{object.cuerpo}}
+        </p>
+    </div>
+</div>
+
+
+<div class="uk-flex uk-flex-right">
+    <div class="uk-card uk-card-default uk-card-body uk-margin-left">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+                    <img src="{{object.publicidad1.url}}" alt="" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock ejemplo%}

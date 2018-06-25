@@ -2,7 +2,20 @@
 {%block ejemplo%}
 {%for obj in object_list%}
 
-<img src="{{obj.publicidad1.url}}" alt="Algo">
+<div class="uk-child-width-1-2@m" uk-grid>
+    <div>
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top">
+                <a href="{% url 'articulo:articulocompleto' slug=obj.slug %}"><img src="{{obj.imagenportada.url}}" alt="Algo"></a>
+            </div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">{{obj.titulo}}</h3>
+                <p>{{obj.textoprevio}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 {%endfor%}
