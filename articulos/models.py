@@ -3,6 +3,7 @@ from django.db import models
 from django.dispatch import receiver
 from .utils import unique_slug_generator
 from django.db.models.signals import pre_save, post_save
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Categoria(models.Model):
@@ -12,21 +13,42 @@ class Categoria(models.Model):
 
 class Region(models.Model):
     nombreregion        =models.CharField(max_length=200)
+    Usuarios            =models.ManyToManyField(User)
     def __str__(self):
         return self.nombreregion
+
+class Cliente(models.Model):
+    nombre_patrocinador =models.CharField(max_length=100)
+    razonsocial         =models.CharField(max_length=200)
+    zona                =models.ManyToManyField(Region)
+    fechacontrato       =models.DateField()
+    def __str__(self):
+        return self.nombre_patrocinador
+
+tiposdearticulos=(
+    ('patrocinado','patrocinado'),
+    ('prueba','prueba'),
+    ('corporativo','corporativo'),
+    ('institucional','institucional'),
+    ('estrategico','estrategico'),
+)
 
 class Articulo(models.Model):
     titulo              =models.CharField(max_length=150)
     textoprevio         =models.CharField(max_length=200)
     imagenportada       =models.ImageField(upload_to='media/')
     textograndecuerpo   =models.CharField(max_length=100)
-    tipo                =models.CharField(max_length=100)
+    tipo                =models.CharField(choices=tiposdearticulos,default='patrocinado',max_length=50)
     cuerpo              =models.TextField()
     publicidad1         =models.ImageField(upload_to='media/')
+    link1               =models.URLField(null=True,blank=True)
     publicidad2         =models.ImageField(upload_to='media/')
+    link2               =models.URLField(null=True,blank=True)
     slug                =models.CharField(max_length=200, blank=True, null=True, unique=True)
     categoria           =models.ForeignKey(Categoria, related_name='category', on_delete=models.CASCADE)
     revista             =models.ForeignKey(Region, related_name='zona', on_delete=models.CASCADE)
+    fechainicio         =models.DateField(auto_now_add=True)
+    fechafin            =models.DateField()
     def __str__(self):
         return self.titulo
 
