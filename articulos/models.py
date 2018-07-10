@@ -20,8 +20,12 @@ class Region(models.Model):
 class Cliente(models.Model):
     nombre_patrocinador =models.CharField(max_length=100)
     razonsocial         =models.CharField(max_length=200)
+    correo              =models.EmailField()
+    telefono            =models.IntegerField(max_length=20)
+    numero_cuenta       =models.IntegerField(max_length=18,null=True,blank=True)
     zona                =models.ManyToManyField(Region)
     fechacontrato       =models.DateField()
+    terminocontrato     =models.DateField()
     def __str__(self):
         return self.nombre_patrocinador
 
@@ -34,6 +38,7 @@ tiposdearticulos=(
 )
 
 class Articulo(models.Model):
+    destacado           =models.BooleanField(default=False)
     titulo              =models.CharField(max_length=150)
     textoprevio         =models.CharField(max_length=200)
     imagenportada       =models.ImageField(upload_to='media/')

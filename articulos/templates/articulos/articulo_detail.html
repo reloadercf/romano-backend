@@ -46,5 +46,18 @@
     </div>
 </div>
 
+<div id="offcanvas-slide" uk-offcanvas>
+    <div class="uk-offcanvas-bar">
 
+        <ul class="uk-nav uk-nav-default">
+            <li class="uk-active"><a href="#">Categorias</a></li>
+
+                {%for obj in categoria%}
+                 <li><a href="{%url 'articulo:articulos'%}">{{obj.nombrecategoria}}</a></li>
+                {%endfor%}
+
+        </ul>
+
+    </div>
+</div>
 {%endblock ejemplo%}

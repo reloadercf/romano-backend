@@ -1,10 +1,39 @@
 {%extends 'index.html'%}
 {%block ejemplo%}
-{%for obj in object_list%}
 
+<center>
+
+
+<div class="uk-position-relative uk-visible-toggle uk-light" uk-slider="autoplay: true" uk-slider="finite: true" uk-slider="autoplay-interval: 1000">
+
+    <ul class="uk-slider-items uk-grid">
+        {%for objeto in destacados %}
+        <li class="uk-width-4-5">
+            <div class="uk-panel">
+                <img src="{{objeto.imagenportada.url}}" alt="">
+                <div class="uk-position-center uk-text-center">
+                    <h2 uk-slider-parallax="x: 100,-100">  <a href="{% url 'articulo:articulocompleto' slug=objeto.slug %}">{{objeto.titulo}}</a></h2></a>
+                    <p uk-slider-parallax="x: 200,-200">{{objeto.textoprevio}}</p>
+                </div>
+            </div>
+        </li>
+        {%endfor%}
+    </ul>
+
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+
+</div>
+
+
+    <br>
+    <br>
+    <br>
+{%for obj in object_list%}
 <div class="uk-child-width-1-2@m" uk-grid>
     <div>
         <div class="uk-card uk-card-default">
+            <center>
             <div class="uk-card-media-top">
                 <a href="{% url 'articulo:articulocompleto' slug=obj.slug %}"><img src="{{obj.imagenportada.url}}" alt="Algo"></a>
             </div>
@@ -12,12 +41,26 @@
                 <h3 class="uk-card-title">{{obj.titulo}}</h3>
                 <p>{{obj.textoprevio}}</p>
             </div>
+            </center>
         </div>
     </div>
 </div>
-
-
+</center>
 
 {%endfor%}
 
+<div id="offcanvas-slide" uk-offcanvas>
+    <div class="uk-offcanvas-bar">
+
+        <ul class="uk-nav uk-nav-default">
+            <li class="uk-active"><a href="#">Categorias</a></li>
+
+                {%for obj in categoria%}
+                 <li><a href="#{{obj.nombrecategoria}}">{{obj.nombrecategoria}}</a></li>
+                {%endfor%}
+
+        </ul>
+
+    </div>
+</div>
 {%endblock ejemplo%}
