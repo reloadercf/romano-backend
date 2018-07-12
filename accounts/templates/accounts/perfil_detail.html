@@ -1,0 +1,28 @@
+{%extends 'index.html'%}
+{%block ejemplo%}
+<center>
+<img src="{{object.foto.url}}"  class='imgRedonda' alt="">
+    <h3>Soy: <strong>{{object.nombre}}</strong></h3>
+    <div class="uk-card uk-card-secondary uk-card-body">
+            <h3 class="uk-card-title">Acerca de mi:</h3>
+            <p>{{object.biografia}}</p>
+        </div>
+     <div class="uk-card uk-card-hover uk-card-body">
+         <h3 class="uk-card-title">Mis intereses son:</h3>
+            <p>{{object.intereses}}</p>
+        </div>
+            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+            <h3 class="uk-card-title">Contacto:</h3>
+            <p>{{object.correo.email}}
+                <br><a href="{{object.facebook}}" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Facebook_New_Logo_%282015%29.svg/2000px-Facebook_New_Logo_%282015%29.svg.png" alt="" width="100" height="50"></a>
+                <br>
+                <a href="{{object.instagram}}" target="_blank"><img src="https://apple5x1.com/app/uploads/2017/04/Instagram.jpg" alt="" height="50" width="100"></a>
+                <br>
+                <a href="{{object.twitter}}" target="_blank"><img src="http://www.mysocialaccounts.com/wp-content/uploads/2017/04/twitter.jpg" alt="" width="100" height="50"></a>
+                <br>
+                <h3><span class="uk-label uk-label-success">{{object.telefono}}</span></h3>
+            </p>
+        </div>
+</center>
+
+{%endblock ejemplo%}

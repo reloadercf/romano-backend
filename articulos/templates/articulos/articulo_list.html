@@ -10,7 +10,7 @@
         {%for objeto in destacados %}
         <li class="uk-width-4-5">
             <div class="uk-panel">
-                <img src="{{objeto.imagenportada.url}}" alt="">
+                <a href="{% url 'articulo:articulocompleto' slug=objeto.slug %}"><img src="{{objeto.imagenportada.url}}" alt="" width="1500" height="1200"></a>
                 <div class="uk-position-center uk-text-center">
                     <h2 uk-slider-parallax="x: 100,-100">  <a href="{% url 'articulo:articulocompleto' slug=objeto.slug %}">{{objeto.titulo}}</a></h2></a>
                     <p uk-slider-parallax="x: 200,-200">{{objeto.textoprevio}}</p>
@@ -29,11 +29,24 @@
     <br>
     <br>
     <br>
+
 {%for obj in object_list%}
-<div class="uk-child-width-1-2@m" uk-grid>
-    <div>
+
+<!-- <div class="uk-child-width-1-2@m" uk-grid> -->
+      <div class="uk-animation-toggle">
+        <div class="uk-card uk-card-default uk-card-body uk-animation-fade">
+
+
+    <div class="uk-panel">
+    <a href="{% url 'articulo:articulocompleto' slug=obj.slug %}"><img class="uk-align-left uk-margin-remove-adjacent " src="{{obj.imagenportada.url}}" width="225" height="150" alt="Example image">
+    <h3 class="uk-card-title" >{{obj.titulo}}</h3><p class="uk-text-center">{{obj.textoprevio}}</p></a>
+        <hr>
+</div>
+            </div>
+    </div>
+   <!-- <div>
         <div class="uk-card uk-card-default">
-            <center>
+
             <div class="uk-card-media-top">
                 <a href="{% url 'articulo:articulocompleto' slug=obj.slug %}"><img src="{{obj.imagenportada.url}}" alt="Algo"></a>
             </div>
@@ -41,13 +54,14 @@
                 <h3 class="uk-card-title">{{obj.titulo}}</h3>
                 <p>{{obj.textoprevio}}</p>
             </div>
-            </center>
+
         </div>
-    </div>
-</div>
-</center>
+    </div> -->
+<!--</div>-->
+
 
 {%endfor%}
+
 
 <div id="offcanvas-slide" uk-offcanvas>
     <div class="uk-offcanvas-bar">

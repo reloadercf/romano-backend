@@ -19,11 +19,12 @@ from articulos import urls as articulos_urls
 from django.conf.urls import url
 from django.views.static import serve
 from django.conf import settings
+from accounts import urls as perfiles_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(articulos_urls,namespace='articulo')),
-
+    path('escritor/',include(perfiles_urls,namespace='escritor')),
     url(
         regex=r'^media/(?P<path>.*)$',
         view=serve,
