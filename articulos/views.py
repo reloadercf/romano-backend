@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import View
 from .models import Articulo,Categoria,Aleatoria
-from .serializers import ArticuloSerializer,AleatoriaSerializer
+from .serializers import ArticuloSerializer,AleatoriaSerializer,CategoriaSerializer
 from rest_framework import viewsets
+from django.db.models import Q
 # Create your views here.
 class ArticuloView(View):
     def get(self, request):
@@ -39,3 +40,20 @@ class ArticuloViewSet(viewsets.ModelViewSet):
 class AleatoriaViewSet(viewsets.ModelViewSet):
     queryset = Aleatoria.objects.all()
     serializer_class = AleatoriaSerializer
+
+class CategoriasViewSet(viewsets.ModelViewSet):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
+class ArticuloFiltro(viewsets.ModelViewSet):
+    queryset = Articulo.objects.all()
+    serializer_class = ArticuloSerializer
+    def get_queryset(self, *args, **kwargs):
+        search = self.request.GET.get()
+        queryset_list = super(ArticuloFiltro, self).get_queryset()
+        if search:
+            queryset_list = queryset_list.filter(
+                Q(categoria__icontains=search)
+            ).distinct()
+
+        return queryset_list

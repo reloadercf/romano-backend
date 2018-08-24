@@ -21,11 +21,13 @@ from django.views.static import serve
 from django.conf import settings
 from accounts import urls as perfiles_urls
 from rest_framework import routers
-from articulos.views import ArticuloViewSet,AleatoriaViewSet
+from articulos.views import ArticuloViewSet,AleatoriaViewSet,CategoriasViewSet,ArticuloFiltro
 ############Rutas API
 router = routers.DefaultRouter()
 router.register('articulos', ArticuloViewSet)
 router.register('publicidadrandom', AleatoriaViewSet)
+router.register('categorias',CategoriasViewSet)
+router.register('articulofiltro',ArticuloFiltro)
 ############Path
 urlpatterns = [
     path('admin/', admin.site.urls),
