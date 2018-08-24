@@ -90,3 +90,7 @@ def pre_save_articulo(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_articulo, sender=Articulo)
+
+class Aleatoria(models.Model):
+    imagen= models.ImageField(upload_to='media/aleatoria',blank=True,null=True)
+    descripcion=models.CharField(max_length=100,blank=True,null=True)

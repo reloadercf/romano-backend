@@ -20,7 +20,13 @@ from django.conf.urls import url
 from django.views.static import serve
 from django.conf import settings
 from accounts import urls as perfiles_urls
-
+from rest_framework import routers
+from articulos.views import ArticuloViewSet,AleatoriaViewSet
+############Rutas API
+router = routers.DefaultRouter()
+router.register('articulos', ArticuloViewSet)
+router.register('publicidadrandom', AleatoriaViewSet)
+############Path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(articulos_urls,namespace='articulo')),
@@ -30,4 +36,5 @@ urlpatterns = [
         view=serve,
         kwargs={'document_root': settings.MEDIA_ROOT}
     ),
+    path('article/', include(router.urls)),
 ]

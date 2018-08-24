@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import View
-from .models import Articulo,Categoria
+from .models import Articulo,Categoria,Aleatoria
+from .serializers import ArticuloSerializer,AleatoriaSerializer
+from rest_framework import viewsets
 # Create your views here.
 class ArticuloView(View):
     def get(self, request):
@@ -28,3 +30,12 @@ class ArticuloDetalle(View):
             'categoria': team
         }
         return render(request, template_name, context)
+
+#################APIS#############3
+class ArticuloViewSet(viewsets.ModelViewSet):
+    queryset = Articulo.objects.all()
+    serializer_class = ArticuloSerializer
+
+class AleatoriaViewSet(viewsets.ModelViewSet):
+    queryset = Aleatoria.objects.all()
+    serializer_class = AleatoriaSerializer
