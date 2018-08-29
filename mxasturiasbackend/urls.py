@@ -28,6 +28,8 @@ router.register('articulos', ArticuloViewSet)
 router.register('publicidadrandom', AleatoriaViewSet)
 router.register('categorias',CategoriasViewSet)
 router.register('articulofiltro',ArticuloFiltro)
+
+
 ############Path
 urlpatterns = [
     path('admin/', admin.site.urls),
