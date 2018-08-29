@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'accounts',
     'rest_framework',
-    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -112,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
      'DEFAULT_AUTHENTICATION_CLASSES': (
