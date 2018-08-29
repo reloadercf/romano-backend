@@ -21,6 +21,7 @@ class Planesvigentes(models.Model):
 class Region(models.Model):
     nombreregion        =models.CharField(max_length=200)
     Usuarios            =models.ManyToManyField(User)
+    portada             =models.ImageField(upload_to='revistas/', blank=True, null=True)
     def __str__(self):
         return self.nombreregion
 

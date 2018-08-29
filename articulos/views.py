@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from django.views.generic import View
+from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
+
 from .models import Articulo,Categoria,Aleatoria
 from .serializers import ArticuloSerializer,AleatoriaSerializer,CategoriaSerializer
-from rest_framework import viewsets
-from django.db.models import Q
+from rest_framework import viewsets, generics, filters
+from rest_framework.filters import SearchFilter,OrderingFilter
+import django_filters
+from django_filters.rest_framework import DjangoFilterBackend
+
 # Create your views here.
 class ArticuloView(View):
     def get(self, request):
@@ -48,12 +54,13 @@ class CategoriasViewSet(viewsets.ModelViewSet):
 class ArticuloFiltro(viewsets.ModelViewSet):
     queryset = Articulo.objects.all()
     serializer_class = ArticuloSerializer
-    def get_queryset(self, *args, **kwargs):
-        search = self.request.GET.get()
-        queryset_list = super(ArticuloFiltro, self).get_queryset()
-        if search:
-            queryset_list = queryset_list.filter(
-                Q(categoria__icontains=search)
-            ).distinct()
 
+    def get_queryset(self,*args,**kwargs):
+        categoria = self.request.GET.get("q")
+        revista =   self.request.GET.get("r")
+        queryset_list = super(ArticuloFiltro, self).get_queryset()
+        if categoria:
+            queryset_list = queryset_list.filter(categoria__nombrecategoria=categoria)
+        if revista:
+            queryset_list = queryset_list.filter(revista__nombreregion=revista)
         return queryset_list
