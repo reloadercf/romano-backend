@@ -1,8 +1,5 @@
 from django.shortcuts import render
 from django.views.generic import View
-from rest_framework.generics import ListAPIView
-from rest_framework.views import APIView
-
 from .models import Articulo,Categoria,Aleatoria
 from .serializers import ArticuloSerializer,AleatoriaSerializer,CategoriaSerializer
 from rest_framework import viewsets
@@ -54,9 +51,12 @@ class ArticuloFiltro(viewsets.ModelViewSet):
     def get_queryset(self,*args,**kwargs):
         categoria = self.request.GET.get("q")
         revista =   self.request.GET.get("r")
+        titulo=     self.request.GET.get("slug")
         queryset_list = super(ArticuloFiltro, self).get_queryset()
         if categoria:
             queryset_list = queryset_list.filter(categoria__nombrecategoria=categoria)
         if revista:
             queryset_list = queryset_list.filter(revista__nombreregion=revista)
+        if titulo:
+            queryset_list = queryset_list.filter(slug=titulo)
         return queryset_list

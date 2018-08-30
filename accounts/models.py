@@ -6,8 +6,6 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
 
-from rest_framework.authtoken.models import Token
-
 
 class Perfil(models.Model):
     correo      = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
@@ -46,12 +44,3 @@ pre_save.connect(rl_pre_save_receiver, sender=Perfil)
 def ensure_profile_exists(sender, **kwargs):
     if kwargs.get('created', False):
         Perfil.objects.get_or_create(correo=kwargs.get('instance'))
-
-
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
-
-
