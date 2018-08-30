@@ -1,4 +1,4 @@
-dj-database-url==0.5.0
+pip freedj-database-url==0.5.0
 Django==2.0.6
 django-heroku==0.3.1
 djangorestframework==3.8.2
