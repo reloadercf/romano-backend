@@ -3,6 +3,7 @@ from django.views.generic import View
 from .models import Articulo,Categoria,Aleatoria
 from .serializers import ArticuloSerializer,AleatoriaSerializer,CategoriaSerializer
 from rest_framework import viewsets
+from .pagination import ArticlePagination
 # Create your views here.
 class ArticuloView(View):
     def get(self, request):
@@ -47,6 +48,7 @@ class CategoriasViewSet(viewsets.ModelViewSet):
 class ArticuloFiltro(viewsets.ModelViewSet):
     queryset = Articulo.objects.all()
     serializer_class = ArticuloSerializer
+    pagination_class = ArticlePagination
 
     def get_queryset(self,*args,**kwargs):
         categoria = self.request.GET.get("q")
