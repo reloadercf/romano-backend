@@ -72,6 +72,8 @@ class Articulo(models.Model):
     fechainicio         =models.DateField(auto_now_add=True)
     fechafin            =models.DateField()
     autor               =models.ForeignKey(Perfil,related_name='escritor', on_delete=models.CASCADE)
+    videoin             =models.BooleanField(default=False)
+    linkvideo           =models.URLField(null=True,blank=True)
     def __str__(self):
         return self.titulo
 
