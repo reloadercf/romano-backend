@@ -50,6 +50,11 @@ botones=(
     ('Visitar','Visitar'),
     ('Comprar','Comprar'),
 )
+posiciones=(
+                ('arriba','arriba'),
+                ('abajo','abajo'),
+                ('sinvideo','sinvideo'),
+            )
 class Articulo(models.Model):
     destacado           =models.BooleanField(default=False)
     titulo              =models.CharField(max_length=150)
@@ -72,8 +77,8 @@ class Articulo(models.Model):
     fechainicio         =models.DateField(auto_now_add=True)
     fechafin            =models.DateField()
     autor               =models.ForeignKey(Perfil,related_name='escritor', on_delete=models.CASCADE)
-    videoin             =models.BooleanField(default=False)
     linkvideo           =models.URLField(null=True,blank=True)
+    posicionvideo       =models.CharField(choices=posiciones,default='sinvideo',max_length=15)
     def __str__(self):
         return self.titulo
 
@@ -97,3 +102,4 @@ pre_save.connect(pre_save_articulo, sender=Articulo)
 class Aleatoria(models.Model):
     imagen= models.ImageField(upload_to='media/aleatoria',blank=True,null=True)
     descripcion=models.CharField(max_length=100,blank=True,null=True)
+

@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import dj_database_url
-import django_heroku
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kvcuq*4x@a$**0mu+%-tqxssr^a#33u8fl61m6_83loo324qut'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'corsheaders',
+    'directorio'
 
 ]
 
@@ -85,11 +85,14 @@ WSGI_APPLICATION = 'mxasturiasbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'databaseplanb',
+        'USER': 'algo',
+        'PASSWORD': 'algo',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -142,7 +145,7 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'es-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
@@ -163,22 +166,16 @@ UTHENTICATION_BACKENDS = (
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static/'
+MEDIA_ROOT = 'media'
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR, "static")
 ]
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
-
-
-DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
 
 
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 #####################################################esta linea causa problemas
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
